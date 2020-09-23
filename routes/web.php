@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 // 使用するコントローラーを宣言する
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\FolderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +22,7 @@ Route::get('/', function () {
 
 // valet環境下ではtodos.test/folders/id/tasks ページへ遷移
 Route::get('/folders/{id}/tasks/', [TaskController::class, 'index'])->name('tasks.index');
+
+Route::get('/folders/create', [FolderController::class, 'showCreateForm'])->name('folders.create');
+
+Route::post('/folders/create', [FolderController::class, 'create']);
