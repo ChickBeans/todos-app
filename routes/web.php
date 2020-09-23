@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+// 使用するコントローラーを宣言する
 use App\Http\Controllers\TaskController;
 
 /*
