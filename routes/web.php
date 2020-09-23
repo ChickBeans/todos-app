@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// valet環境下ではtodos.test/folders/id/tasks ページへ遷移
+Route::get('/folders/{id}/tasks/', [TaskController::class, 'index'])->name('tasks.index');
