@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 // 使用するコントローラーを宣言する
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\FolderController;
+use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,3 +33,9 @@ Route::post('/folders/{id}/tasks/create', [TaskController::class, 'create']);
 
 Route::get('/folders/{id}/tasks/{task_id}/edit', [TaskController::class, 'showEditForm'])->name('tasks.edit');
 Route::post('/folders/{id}/tasks/{task_id}/edit', [TaskController::class, 'edit']);
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
