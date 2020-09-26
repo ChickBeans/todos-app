@@ -24,20 +24,21 @@ Route::get('/', function () {
 
 // 認証を求める処理
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-    Route::get('/folders/{id}/tasks/', [TaskController::class, 'index'])->name('tasks.index');
-
-    Route::get('/folders/create', [FolderController::class, 'showCreateForm'])->name('folders.create');
-    Route::post('/folders/create', [FolderController::class, 'create']);
-
-    Route::get('/folders/{id}/tasks/create', [TaskController::class, 'showCreateForm'])->name('tasks.create');
-    Route::post('/folders/{id}/tasks/create', [TaskController::class, 'create']);
-
-    Route::get('/folders/{id}/tasks/{task_id}/edit', [TaskController::class, 'showEditForm'])->name('tasks.edit');
-    Route::post('/folders/{id}/tasks/{task_id}/edit', [TaskController::class, 'edit']);
-
     Route::get('/', [HomeController::class, 'index'])->name('home');
+    // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+    Route::group(['middleware' => 'can:view,folder'], function () {
+        Route::get('/folders/{folder}/tasks', [TaskController::class, 'index'])->name('tasks.index');
+
+        Route::get('/folders/create', [FolderController::class, 'showCreateForm'])->name('folders.create');
+        Route::post('/folders/create', [FolderController::class, 'create']);
+
+        Route::get('/folders/{folder}/tasks/create', [TaskController::class, 'showCreateForm'])->name('tasks.create');
+        Route::post('/folders/{folder}/tasks/create', [TaskController::class, 'create']);
+
+        Route::get('/folders/{folder}/tasks/{task}/edit', [TaskController::class, 'showEditForm'])->name('tasks.edit');
+        Route::post('/folders/{folder}/tasks/{task}/edit', [TaskController::class, 'edit']);
+    });
 });
 
 Auth::routes();
