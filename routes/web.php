@@ -22,20 +22,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// valet環境下ではtodos.test/folders/id/tasks ページへ遷移
-Route::get('/folders/{id}/tasks/', [TaskController::class, 'index'])->name('tasks.index');
+// 認証を求める処理
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/folders/create', [FolderController::class, 'showCreateForm'])->name('folders.create');
-Route::post('/folders/create', [FolderController::class, 'create']);
+    Route::get('/folders/{id}/tasks/', [TaskController::class, 'index'])->name('tasks.index');
 
-Route::get('/folders/{id}/tasks/create', [TaskController::class, 'showCreateForm'])->name('tasks.create');
-Route::post('/folders/{id}/tasks/create', [TaskController::class, 'create']);
+    Route::get('/folders/create', [FolderController::class, 'showCreateForm'])->name('folders.create');
+    Route::post('/folders/create', [FolderController::class, 'create']);
 
-Route::get('/folders/{id}/tasks/{task_id}/edit', [TaskController::class, 'showEditForm'])->name('tasks.edit');
-Route::post('/folders/{id}/tasks/{task_id}/edit', [TaskController::class, 'edit']);
+    Route::get('/folders/{id}/tasks/create', [TaskController::class, 'showCreateForm'])->name('tasks.create');
+    Route::post('/folders/{id}/tasks/create', [TaskController::class, 'create']);
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/folders/{id}/tasks/{task_id}/edit', [TaskController::class, 'showEditForm'])->name('tasks.edit');
+    Route::post('/folders/{id}/tasks/{task_id}/edit', [TaskController::class, 'edit']);
+
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+});
 
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
