@@ -1,3 +1,20 @@
+## Todos-App URL (http://portfolio-todos-app.herokuapp.com/login)
+
+### 目的
+Laravelの操作、流れを覚える為に作成
+
+### 実装機能
+1. CRUDシステムの実装
+2. postgreSQLの使用
+3. seederの使用
+4. バリデーションの使用、日本語化
+5. 会員登録機能
+6. パスワード再設定機能→ローカルでは利用できたが、heroku上ではエラー…原因調査中
+
+### 今後
+Docker兼AWS環境で掲示板アプリを作成する
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
