@@ -13,9 +13,12 @@
                 </div>
                 <div class="list-group">
                     @foreach($folders as $folder)
-                    <a href="{{ route('tasks.index', ['folder' => $folder->id]) }}" class="list-group-item {{ $current_folder_id === $folder->id ? 'active' : '' }}">
-                        {{ $folder->title }}
-                    </a>
+                    <div class="-item">
+                        <a href="{{ route('tasks.index', ['folder' => $folder->id]) }}" class="list-group-item {{ $current_folder_id === $folder->id ? 'active' : '' }}">
+                            {{ $folder->title }}
+                        </a>
+                        <a href="{{ route('folder.delete', ['folder' => $folder->id ]) }}" class="list-group-item">削除</a>
+                    </div>
                     @endforeach
                 </div>
             </nav>
@@ -37,6 +40,7 @@
                             <th>状態</th>
                             <th>期限</th>
                             <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -48,6 +52,7 @@
                             </td>
                             <td>{{ $task->formatted_due_date }}</td>
                             <td><a href="{{ route('tasks.edit', ['folder' => $task->folder_id, 'task' => $task->id]) }}">編集</a></td>
+                            <td><a href="{{ route('tasks.delete', ['folder' => $task->folder_id, 'task' => $task->id]) }}">削除</a></td>
                         </tr>
                         @endforeach
                     </tbody>

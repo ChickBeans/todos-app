@@ -59,7 +59,7 @@ class TaskController extends Controller
         $folder->tasks()->save($task);
 
         return redirect()->route('tasks.index', [
-            'id' => $folder->id,
+            'folder' => $folder->id,
         ]);
     }
 
@@ -71,7 +71,7 @@ class TaskController extends Controller
      */
     public function showEditForm(Folder $folder, Task $task)
     {
-        // $this->checkRelation($folder, $task);
+        $this->checkRelation($folder, $task);
 
         return view('tasks/edit', [
             'task' => $task,
@@ -88,13 +88,34 @@ class TaskController extends Controller
     public function edit(Folder $folder, Task $task, EditTask $request)
     {
 
-        // $this->checkRelation($folder, $task);
+        $this->checkRelation($folder, $task);
 
         $task->title = $request->title;
         $task->status = $request->status;
         $task->due_date = $request->due_date;
         $task->save();
 
+        return redirect()->route('tasks.index', [
+            'folder' => $task->folder_id,
+        ]);
+    }
+
+    /**
+     * タスク削除
+     * @param Folder $folder
+     * @param Task $task
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function delete(Folder $folder, Task $task)
+    {
+        // ユーザーのフォルダを取得する
+        $user = Auth::user();
+
+        // user_idとfolder_idが一致する場合、タスクを削除する
+        if ($user->id === $folder->user_id && $folder->id === $task->folder_id) {
+            $tasks = Task::findOrfail($task->id);
+            $tasks->delete();
+        }
         return redirect()->route('tasks.index', [
             'folder' => $task->folder_id,
         ]);
