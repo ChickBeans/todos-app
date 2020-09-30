@@ -13,11 +13,11 @@
                 </div>
                 <div class="list-group">
                     @foreach($folders as $folder)
-                    <div class="-item">
+                    <div id="lists-item" class="lists-item">
                         <a href="{{ route('tasks.index', ['folder' => $folder->id]) }}" class="list-group-item {{ $current_folder_id === $folder->id ? 'active' : '' }}">
                             {{ $folder->title }}
                         </a>
-                        <a href="{{ route('folder.delete', ['folder' => $folder->id ]) }}" class="list-group-item">削除</a>
+                        <a href="{{ route('folder.delete', ['folder' => $folder->id ]) }}" class="list-group-item folder-delete">削除</a>
                     </div>
                     @endforeach
                 </div>
