@@ -2,9 +2,10 @@
 
 ### 目的
 Laravelの操作、流れを覚える為に作成
+教材 (https://www.hypertextcandy.com/laravel-tutorial-introduction)
 
 ### 実装機能
-1. CRUDシステムの実装
+1. CRUDシステムの実装→delete機能は完全にオリジナル
 2. postgreSQLの使用
 3. seederの使用
 4. バリデーションの使用、日本語化
