@@ -1,4 +1,6 @@
 ## Todos-App URL (http://portfolio-todos-app.herokuapp.com/login)
+テストアカウント： メールアドレス[test@test.com]
+             パスワード[test1234]
 
 ### 目的
 Laravelの操作、流れを覚える為に作成
